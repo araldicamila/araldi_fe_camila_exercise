@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import {GlobalStyle} from 'assets/styles/global';
 import TeamOverview from './pages/TeamOverview';
 import Teams from './pages/Teams';
 import UserOverview from './pages/UserOverview';
+
 
 const App = () => {
     const router = createBrowserRouter([
@@ -19,8 +21,13 @@ const App = () => {
             element: <UserOverview />,
         },
     ]);
-    
-    return <RouterProvider router={router} />;
+
+    return (
+        <React.Fragment>
+            <GlobalStyle />
+            <RouterProvider router={router} />
+        </React.Fragment>
+    );
 };
 
 export default App;
