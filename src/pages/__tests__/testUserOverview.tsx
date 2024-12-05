@@ -15,6 +15,18 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('UserOverview', () => {
+    beforeAll(() => {
+        jest.useFakeTimers();
+    });
+
+    afterEach(() => {
+        jest.clearAllTimers();
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
+    });
+
     it('should render UserOverview', () => {
         render(<UserOverview />);
 

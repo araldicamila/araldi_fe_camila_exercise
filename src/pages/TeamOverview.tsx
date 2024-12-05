@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {ListItem, UserData} from 'types';
+import Input from 'components/Input';
 import {getTeamOverview, getUserData} from '../api';
 import Card from '../components/Card';
 import {Container} from '../components/GlobalComponents';
@@ -32,11 +33,14 @@ const TeamOverview = () => {
     const [pageData, setPageData] = useState<PageState>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
+    const [filteredUsers, setFilteredUsers] = useState<UserData[]>();
+    const [searchValue, setSearchValue] = useState<string>('');
+
     useEffect(() => {
         const getTeamUsers = async () => {
             const teamOverview = await getTeamOverview(teamId);
 
-            if (!teamOverview) {
+            if (!teamOverview && navigate) {
                 navigate('/');
 
                 return;
@@ -52,12 +56,26 @@ const TeamOverview = () => {
                 teamLead,
                 teamMembers,
             });
-            
+
             setIsLoading(false);
         };
-        
+
         getTeamUsers();
-    }, [navigate, teamId]);
+    }, [teamId]);
+
+    const onChangeSearchInput = (value: string) => {
+        setSearchValue(value);
+
+        if (!value) {
+            setFilteredUsers(pageData?.teamMembers);
+        }
+
+        setFilteredUsers(
+            pageData?.teamMembers?.filter(user =>
+                user.displayName?.toLowerCase()?.includes(value.toLowerCase())
+            )
+        );
+    };
 
     return (
         <Container>
@@ -69,8 +87,9 @@ const TeamOverview = () => {
                     navigationProps={pageData?.teamLead}
                 />
             )}
+            <Input onChange={onChangeSearchInput} value={searchValue} />
             <List
-                items={convertUserToListItem(pageData?.teamMembers ?? [])}
+                items={convertUserToListItem(filteredUsers ?? pageData?.teamMembers ?? [])}
                 isLoading={isLoading}
             />
         </Container>

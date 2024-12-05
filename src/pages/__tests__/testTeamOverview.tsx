@@ -9,7 +9,7 @@ jest.mock('react-router-dom', () => ({
             teamName: 'Some Team',
         },
     }),
-    useNavigate: () => ({}),
+    useNavigate: () => jest.fn(),
     useParams: () => ({
         teamId: '1',
     }),
@@ -34,6 +34,7 @@ describe('TeamOverview', () => {
             teamLeadId: '2',
             teamMemberIds: ['3', '4', '5'],
         };
+
         const userData = {
             id: '2',
             firstName: 'userData',
@@ -42,6 +43,7 @@ describe('TeamOverview', () => {
             location: '',
             avatar: '',
         };
+        
         jest.spyOn(API, 'getTeamOverview').mockResolvedValue(teamOverview);
         jest.spyOn(API, 'getUserData').mockResolvedValue(userData);
 
