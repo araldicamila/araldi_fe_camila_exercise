@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useLocation, useParams} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {ListItem, UserData} from 'types';
 import {getTeamOverview, getUserData} from '../api';
 import Card from '../components/Card';
@@ -27,6 +27,7 @@ interface PageState {
 
 const TeamOverview = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const {teamId} = useParams();
     const [pageData, setPageData] = useState<PageState>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -36,7 +37,7 @@ const TeamOverview = () => {
             const teamOverview = await getTeamOverview(teamId);
 
             if (!teamOverview) {
-                window.location.replace('/');
+                navigate('/');
 
                 return;
             }
@@ -54,8 +55,9 @@ const TeamOverview = () => {
             
             setIsLoading(false);
         };
+        
         getTeamUsers();
-    }, [teamId]);
+    }, [navigate, teamId]);
 
     return (
         <Container>
