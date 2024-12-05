@@ -45,15 +45,13 @@ const TeamOverview = () => {
 
             const teamLead = await getUserData(teamLeadId);
 
-            const teamMembers = [];
-            for (const teamMemberId of teamMemberIds) {
-                const data = await getUserData(teamMemberId);
-                teamMembers.push(data);
-            }
+            const teamMembers = await Promise.all(teamMemberIds.map(id => getUserData(id)));
+
             setPageData({
                 teamLead,
                 teamMembers,
             });
+            
             setIsLoading(false);
         };
         getTeamUsers();
