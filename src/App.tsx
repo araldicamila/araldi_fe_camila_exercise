@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {Fragment} from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import {GlobalStyle} from 'assets/styles/global';
 import TeamOverview from './pages/TeamOverview';
@@ -23,10 +23,10 @@ const App = () => {
     ]);
 
     return (
-        <React.Fragment>
+        <Fragment>
             <GlobalStyle />
             <RouterProvider router={router} />
-        </React.Fragment>
+        </Fragment>
     );
 };
 

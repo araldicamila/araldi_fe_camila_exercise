@@ -33,7 +33,16 @@ const TeamOverview = () => {
 
     useEffect(() => {
         const getTeamUsers = async () => {
-            const {teamLeadId, teamMemberIds = []} = await getTeamOverview(teamId);
+            const teamOverview = await getTeamOverview(teamId);
+
+            if (!teamOverview) {
+                window.location.replace('/');
+
+                return;
+            }
+
+            const {teamLeadId, teamMemberIds = []} = teamOverview;
+
             const teamLead = await getUserData(teamLeadId);
 
             const teamMembers = [];
@@ -52,7 +61,7 @@ const TeamOverview = () => {
 
     return (
         <Container>
-            <Header title={`Team ${location?.state?.name}`} />
+            {location && location.state ? <Header title={`Team ${location?.state?.name}`} /> : null}
             {!isLoading && (
                 <Card
                     columns={convertUserToColumns(pageData?.teamLead, true)}

@@ -1,6 +1,10 @@
 import {UserData} from 'types';
 
 export const convertUserToColumns = (user: UserData, itsTeamLead?: boolean) => {
+    if (!user) {
+        return [];
+    }
+
     const columns = [
         {
             key: 'Name',
