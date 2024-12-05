@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useLocation, useParams} from 'react-router-dom';
 import {ListItem, UserData} from 'types';
 import {getTeamOverview, getUserData} from '../api';
@@ -28,10 +28,10 @@ interface PageState {
 const TeamOverview = () => {
     const location = useLocation();
     const {teamId} = useParams();
-    const [pageData, setPageData] = React.useState<PageState>({});
-    const [isLoading, setIsLoading] = React.useState<boolean>(true);
+    const [pageData, setPageData] = useState<PageState>({});
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    React.useEffect(() => {
+    useEffect(() => {
         const getTeamUsers = async () => {
             const {teamLeadId, teamMemberIds = []} = await getTeamOverview(teamId);
             const teamLead = await getUserData(teamLeadId);
@@ -60,7 +60,10 @@ const TeamOverview = () => {
                     navigationProps={pageData?.teamLead}
                 />
             )}
-            <List items={convertUserToListItem(pageData?.teamMembers ?? [])} isLoading={isLoading} />
+            <List
+                items={convertUserToListItem(pageData?.teamMembers ?? [])}
+                isLoading={isLoading}
+            />
         </Container>
     );
 };

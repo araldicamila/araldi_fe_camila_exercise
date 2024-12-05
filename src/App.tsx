@@ -19,6 +19,7 @@ const App = () => {
             element: <UserOverview />,
         },
     ]);
+    
     return <RouterProvider router={router} />;
 };
 

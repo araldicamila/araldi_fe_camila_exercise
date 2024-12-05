@@ -25,15 +25,16 @@ const Card = ({
 
     return (
         <Container
-            data-testid={`cardContainer-${id}`}
+            data-testid={`card-container-${id}`}
             hasNavigation={hasNavigation}
-            onClick={(e: Event) => {
+            onClick={(event: Event) => {
+                event.preventDefault();
+
                 if (hasNavigation) {
                     navigate(url, {
                         state: navigationProps,
                     });
                 }
-                e.preventDefault();
             }}
         >
             {columns.map(({key: columnKey, value}) => (
