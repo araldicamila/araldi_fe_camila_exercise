@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
 import {ListItem, UserData} from 'types';
 import Input from 'components/Input';
 import {getTeamOverview, getUserData} from '../api';
@@ -28,7 +28,6 @@ interface PageState {
 
 const TeamOverview = () => {
     const location = useLocation();
-    const navigate = useNavigate();
     const {teamId} = useParams();
     const [pageData, setPageData] = useState<PageState>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -40,8 +39,13 @@ const TeamOverview = () => {
         const getTeamUsers = async () => {
             const teamOverview = await getTeamOverview(teamId);
 
-            if (!teamOverview && navigate) {
-                navigate('/');
+            if (!teamOverview) {
+                setPageData({
+                    teamLead: null,
+                    teamMembers: null,
+                });
+
+                setIsLoading(false);
 
                 return;
             }

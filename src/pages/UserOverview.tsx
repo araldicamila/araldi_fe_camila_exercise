@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
+import React from 'react';
+import {useLocation} from 'react-router-dom';
 import Card from '../components/Card';
 import {Container} from '../components/GlobalComponents';
 import Header from '../components/Header';
@@ -7,13 +7,6 @@ import {convertUserToColumns} from './helper';
 
 const UserOverview = () => {
     const location = useLocation();
-    const navigate = useNavigate();
-    
-    useEffect(() => {
-        if (!location.state) {
-           navigate('/');
-        }
-    }, [location, navigate]);
 
     return (
         <Container>
