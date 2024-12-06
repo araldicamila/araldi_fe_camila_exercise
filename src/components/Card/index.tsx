@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Teams, UserData} from 'types';
+import {Teams, UserData} from '../../types';
 import {Container} from './styles';
 
 interface Props {
