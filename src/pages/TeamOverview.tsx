@@ -3,6 +3,7 @@ import {useLocation, useParams} from 'react-router-dom';
 import {ListItem, UserData} from 'types';
 import Input from 'components/Input';
 import {getTeamOverview, getUserData} from '../api';
+
 import Card from '../components/Card';
 import {Container} from '../components/GlobalComponents';
 import Header from '../components/Header';
@@ -83,6 +84,7 @@ const TeamOverview = () => {
 
     return (
         <Container>
+            
             <Header title={location?.state ? `Team: ${location?.state?.name}` : ''} />
             {!isLoading && pageData?.teamLead && (
                 <Card

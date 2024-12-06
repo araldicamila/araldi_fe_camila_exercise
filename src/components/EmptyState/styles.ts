@@ -15,6 +15,6 @@ export const EmptyStateContainer = styled.div`
     }
 
     p {
-      color: var(--colorNeutral500);
+      color: ${({theme}) => theme.colorNeutral500};
     }
 `;

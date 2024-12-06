@@ -6,7 +6,7 @@ export const Container = styled.div<{hasNavigation: boolean, margin?: string;}>`
     align-items: flex-start;
     justify-content: center;
     border-radius: 0.25rem;
-    background: var(--colorLight100);
+    background: ${({theme}) => theme.colorLight100};
     padding: 20px;
     width: 250px;
     max-height: 200px;

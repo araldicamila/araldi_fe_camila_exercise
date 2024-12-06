@@ -32,4 +32,6 @@ export const BackButton = styled.button`
     outline: 0;
     border-radius: 0.25rem;
     border: none;
+
+    color: #0A2540;
 `;

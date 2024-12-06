@@ -13,7 +13,7 @@ const spinnerAnimation = keyframes`
 export const SpinnerBody = styled.div`
     height: 4rem;
     width: 4rem;
-    border: 4px solid var(--colorNeutral200);
+    border: 4px solid ${({theme}) => theme.colorNeutral200};;
     border-top-color: var(--purple);
     border-radius: 50%;
     animation: ${spinnerAnimation} 800ms linear infinite;

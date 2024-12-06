@@ -42,7 +42,7 @@ const Card = ({
         >
             {columns?.map(({key: columnKey, value}) => (
                 <p key={columnKey}>
-                    <strong>{columnKey}{value ? ':' : ''}</strong>&nbsp;{value}
+                    <strong>{columnKey}</strong>&nbsp;{value}
                 </p>
             ))}
         </Container>
