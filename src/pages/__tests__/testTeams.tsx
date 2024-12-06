@@ -30,9 +30,26 @@ describe('Teams', () => {
 
     it('should render spinner while loading', async () => {
         // TODO - Add code for this test
+        jest.spyOn(API, 'getTeams').mockResolvedValueOnce([
+            {
+                id: '1',
+                name: 'Team1',
+            },
+            {
+                id: '2',
+                name: 'Team2',
+            },
+        ]);
+
         render(<Teams />);
 
         expect(screen.getByTestId('spinner')).toBeInTheDocument();
+
+        await waitFor(() => {
+            expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+        });
+
+        expect(screen.getByText('Team1')).toBeInTheDocument();
     });
 
     it('should render teams list', async () => {
