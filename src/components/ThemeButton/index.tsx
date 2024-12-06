@@ -1,8 +1,8 @@
 import React, {Fragment} from 'react';
 import {Outlet} from 'react-router-dom';
-import {Expand} from '@theme-toggles/react';
+import Toggle from 'react-toggle';
+import {IoIosSunny, IoMdMoon} from 'react-icons/io';
 import {ContainerToggle} from './styles';
-import '@theme-toggles/react/css/Expand.css';
 
 interface IThemeButton {
     onChangeTheme: () => void;
@@ -13,12 +13,13 @@ const ThemeButton = ({onChangeTheme, isThemeToggleChecked}: IThemeButton) => {
     return (
         <Fragment>
             <ContainerToggle data-testid="container-toggle">
-                <Expand
-                    toggled={isThemeToggleChecked}
-                    toggle={onChangeTheme}
-                    placeholder=""
-                    onPointerEnterCapture={() => {}}
-                    onPointerLeaveCapture={() => {}}
+                <Toggle
+                    checked={isThemeToggleChecked}
+                    onChange={onChangeTheme}
+                    icons={{
+                        checked: <IoIosSunny color="#4d4d4d" />,
+                        unchecked: <IoMdMoon color="#FFF" />,
+                    }}
                 />
             </ContainerToggle>
             <Outlet />

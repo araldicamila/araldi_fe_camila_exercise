@@ -10,7 +10,7 @@ const EmptyState = () => {
     return (
         <EmptyStateContainer data-testid="empty-state-container">
             <img
-                src={theme.background ? EmptyStateDarkImage : EmptyStateImage}
+                src={theme?.background ? EmptyStateDarkImage : EmptyStateImage}
                 alt="No data found"
             />
 

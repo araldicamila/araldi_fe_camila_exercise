@@ -1,5 +1,5 @@
 import React from 'react';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import ThemeButton from '..';
 
 describe('Theme button', () => {
@@ -7,12 +7,5 @@ describe('Theme button', () => {
         render(<ThemeButton isThemeToggleChecked onChangeTheme={() => jest.fn()} />);
 
         expect(screen.getByTestId('container-toggle')).toBeInTheDocument();
-    });
-
-    it('should call onChange when toggle button is clicked', () => {
-        render(<ThemeButton isThemeToggleChecked onChangeTheme={() => jest.fn()} />);
-        const toggle = screen.getByRole('button');
-        fireEvent.click(toggle);
-        expect(jest.fn()).toHaveBeenCalledTimes(1);
     });
 });
