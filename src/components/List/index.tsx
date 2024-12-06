@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {ListItem} from 'types';
+import {ListItem} from '../../types';
 import EmptyState from '../EmptyState';
 import Card from '../Card';
-import {Spinner} from '../Spinner';
+import Spinner from '../Spinner';
 import {Container} from './styles';
 
 

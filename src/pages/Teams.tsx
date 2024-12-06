@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {ListItem, Teams as TeamsList} from 'types';
-import Input from 'components/Input';
+import {ListItem, Teams as TeamsList} from '../types';
+import Input from '../components/Input';
 import {getTeams as fetchTeams} from '../api';
 import Header from '../components/Header';
 import List from '../components/List';

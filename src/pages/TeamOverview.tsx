@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useLocation, useParams} from 'react-router-dom';
-import {ListItem, UserData} from 'types';
-import Input from 'components/Input';
+import {ListItem, UserData} from '../types';
+import Input from '../components/Input';
 import {getTeamOverview, getUserData} from '../api';
 
 import Card from '../components/Card';

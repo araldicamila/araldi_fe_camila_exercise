@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import {GlobalStyle} from 'assets/styles/global';
-import {darkTheme, lightTheme} from 'assets/styles/themes';
 import {ThemeProvider} from 'styled-components';
-import ThemeButton from 'components/ThemeButton';
+import {GlobalStyle} from './assets/styles/global';
+import {darkTheme, lightTheme} from './assets/styles/themes';
+import ThemeButton from './components/ThemeButton';
 import TeamOverview from './pages/TeamOverview';
 import Teams from './pages/Teams';
 import UserOverview from './pages/UserOverview';
 
 const App = () => {
-    const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
+    const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
+        const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        return !!isDark;
+    });
 
     const router = createBrowserRouter([
         {
