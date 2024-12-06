@@ -7,6 +7,7 @@ describe('Empty State', () => {
         render(<EmptyState />);
 
         expect(screen.getByTestId('empty-state-container')).toBeInTheDocument();
+        expect(screen.getByAltText('No data found')).toBeInTheDocument();
         expect(screen.getByText('No data found!')).toBeInTheDocument();
     });
 });

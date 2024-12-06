@@ -26,6 +26,15 @@ describe('List', () => {
         expect(screen.queryByTestId('card-container')).not.toBeInTheDocument();
     });
 
+    it('should show empty state message when items are empty', () => {
+        render(<List isLoading={false} items={[]} />);
+
+        expect(screen.queryByTestId('spinner')).not.toBeInTheDocument();
+        expect(screen.getByTestId('empty-state-container')).toBeInTheDocument();
+        expect(screen.getByAltText('No data found')).toBeInTheDocument();
+        expect(screen.getByText('No data found!')).toBeInTheDocument();
+    });
+
     it('should not render spinner and render items when it is not loading', () => {
         const items = [
             {
