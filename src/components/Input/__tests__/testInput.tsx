@@ -5,18 +5,6 @@ import Input from '..';
 const mockOnChange = jest.fn();
 
 describe('Input', () => {
-    beforeAll(() => {
-        jest.useFakeTimers();
-    });
-
-    afterEach(() => {
-        jest.clearAllTimers();
-    });
-
-    afterAll(() => {
-        jest.useRealTimers();
-    });
-
     test('should render with the correct value', () => {
         const value = 'Hello world!';
         render(<Input onChange={mockOnChange} value={value} />);
