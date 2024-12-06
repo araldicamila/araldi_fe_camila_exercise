@@ -83,12 +83,13 @@ const TeamOverview = () => {
 
     return (
         <Container>
-            {location && location.state ? <Header title={`Team ${location?.state?.name}`} /> : null}
+            {location && location.state ? <Header title={`Team: ${location?.state?.name}`} /> : null}
             {!isLoading && (
                 <Card
                     columns={convertUserToColumns(pageData?.teamLead, true)}
                     url={`/user/${pageData?.teamLead?.id}`}
                     navigationProps={pageData?.teamLead}
+                    cardMargin='1rem 0'
                 />
             )}
             <Input onChange={onChangeSearchInput} value={searchValue} />

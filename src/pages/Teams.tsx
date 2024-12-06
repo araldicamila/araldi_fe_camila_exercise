@@ -7,7 +7,7 @@ import List from '../components/List';
 import {Container} from '../components/GlobalComponents';
 
 const convertTeamToListItem = (teams: TeamsList[]): ListItem[] => {
-    return teams.map(team => {
+    return teams?.map(team => {
         const columns = [
             {
                 key: 'Name',
@@ -34,7 +34,13 @@ const Teams = () => {
     useEffect(() => {
         const getTeams = async () => {
             const response = await fetchTeams();
-            setTeams(response);
+
+            if (!response) {
+                setTeams([]);
+            } else {
+                setTeams(response);
+            }
+            
             setIsLoading(false);
         };
 

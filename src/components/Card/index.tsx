@@ -12,6 +12,7 @@ interface Props {
     }>;
     hasNavigation?: boolean;
     navigationProps?: UserData | Teams;
+    cardMargin?: string;
 }
 
 const Card = ({
@@ -20,11 +21,13 @@ const Card = ({
     url,
     hasNavigation = true,
     navigationProps = null,
+    cardMargin,
 }: Props): JSX.Element => {
     const navigate = useNavigate();
 
     return (
         <Container
+            margin={cardMargin}
             data-testid={`card-container-${id}`}
             hasNavigation={hasNavigation}
             onClick={(event: Event) => {
@@ -37,9 +40,9 @@ const Card = ({
                 }
             }}
         >
-            {columns.map(({key: columnKey, value}) => (
+            {columns?.map(({key: columnKey, value}) => (
                 <p key={columnKey}>
-                    <strong>{columnKey}</strong>&nbsp;{value}
+                    <strong>{columnKey}{value ? ':' : ''}</strong>&nbsp;{value}
                 </p>
             ))}
         </Container>

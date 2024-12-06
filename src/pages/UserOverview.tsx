@@ -10,11 +10,12 @@ const UserOverview = () => {
 
     return (
         <Container>
-            <Header title={`User ${location?.state?.firstName} ${location?.state?.lastName}`} />
+            <Header title={`User: ${location?.state?.firstName} ${location?.state?.lastName}`} />
             <Card
                 columns={convertUserToColumns(location?.state)}
                 hasNavigation={false}
                 navigationProps={location?.state}
+                cardMargin='2rem 0'
             />
         </Container>
     );
