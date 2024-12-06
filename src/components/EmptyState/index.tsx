@@ -4,7 +4,7 @@ import {EmptyStateContainer} from './styles';
 
 const EmptyState = () => {
     return (
-        <EmptyStateContainer>
+        <EmptyStateContainer data-testid="empty-state-container">
             <img src={EmptyStateImage} alt="No data found" />
 
             <p>No data found!</p>
