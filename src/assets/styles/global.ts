@@ -5,7 +5,9 @@ export const GlobalStyle = createGlobalStyle`
     --colorNeutral500: #9C9C9C;
     --colorNeutral600: #696969;
     --colorNeutral900: #0A2540;
+    --colorNeutral300: #D2D2D2;
     --colorNeutral200: #d1d5db;
+    
 
     --colorLight100: #f6f6f6;
     --colorLight200: rgb(230, 233, 237);
