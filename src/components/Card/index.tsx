@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {useNavigate} from 'react-router-dom';
-import {Teams, UserData} from 'types';
+import {Teams, UserData} from '../../types';
 import {Container} from './styles';
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
     }>;
     hasNavigation?: boolean;
     navigationProps?: UserData | Teams;
+    cardMargin?: string;
 }
 
 const Card = ({
@@ -20,23 +21,26 @@ const Card = ({
     url,
     hasNavigation = true,
     navigationProps = null,
+    cardMargin,
 }: Props): JSX.Element => {
     const navigate = useNavigate();
 
     return (
         <Container
-            data-testid={`cardContainer-${id}`}
+            margin={cardMargin}
+            data-testid={`card-container-${id}`}
             hasNavigation={hasNavigation}
-            onClick={(e: Event) => {
+            onClick={(event: Event) => {
+                event.preventDefault();
+
                 if (hasNavigation) {
                     navigate(url, {
                         state: navigationProps,
                     });
                 }
-                e.preventDefault();
             }}
         >
-            {columns.map(({key: columnKey, value}) => (
+            {columns?.map(({key: columnKey, value}) => (
                 <p key={columnKey}>
                     <strong>{columnKey}</strong>&nbsp;{value}
                 </p>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {render, screen, waitFor} from '@testing-library/react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import * as API from '../../api';
 import TeamOverview from '../TeamOverview';
 
@@ -9,7 +9,7 @@ jest.mock('react-router-dom', () => ({
             teamName: 'Some Team',
         },
     }),
-    useNavigate: () => ({}),
+    useNavigate: () => jest.fn(),
     useParams: () => ({
         teamId: '1',
     }),
@@ -34,6 +34,7 @@ describe('TeamOverview', () => {
             teamLeadId: '2',
             teamMemberIds: ['3', '4', '5'],
         };
+
         const userData = {
             id: '2',
             firstName: 'userData',
@@ -42,10 +43,79 @@ describe('TeamOverview', () => {
             location: '',
             avatar: '',
         };
-        jest.spyOn(API, 'getTeamOverview').mockImplementationOnce(() => Promise.resolve({} as any));
-        jest.spyOn(API, 'getUserData').mockImplementationOnce(() => Promise.resolve({} as any));
+
+        jest.spyOn(API, 'getTeamOverview').mockResolvedValue(teamOverview);
+        jest.spyOn(API, 'getUserData').mockResolvedValue(userData);
 
         render(<TeamOverview />);
+
+        await waitFor(() => {
+            expect(screen.queryAllByText('userData')).toHaveLength(4);
+        });
+    });
+
+    it('should render empty state when search returns no data', async () => {
+        const teamOverview = {
+            id: '1',
+            teamLeadId: '2',
+            teamMemberIds: ['3', '4', '5'],
+        };
+
+        const userData = {
+            id: '2',
+            firstName: 'userData',
+            lastName: 'userData',
+            displayName: 'userData',
+            location: '',
+            avatar: '',
+        };
+
+        jest.spyOn(API, 'getTeamOverview').mockResolvedValue(teamOverview);
+        jest.spyOn(API, 'getUserData').mockResolvedValue(userData);
+
+        render(<TeamOverview />);
+
+        await waitFor(() => {
+            expect(screen.queryAllByText('userData')).toHaveLength(4);
+        });
+
+        fireEvent.change(screen.getByTestId('input-component'), {
+            target: {
+                value: 'Teste',
+            },
+        });
+
+        await waitFor(() => {
+            expect(screen.getByTestId('empty-state-container')).toBeInTheDocument();
+        });
+    });
+
+    it('should filters the list based on search input value', async () => {
+        const teamOverview = {
+            id: '1',
+            teamLeadId: '2',
+            teamMemberIds: ['3', '4', '5'],
+        };
+
+        const userData = {
+            id: '2',
+            firstName: 'userData',
+            lastName: 'userData',
+            displayName: 'userData',
+            location: '',
+            avatar: '',
+        };
+
+        jest.spyOn(API, 'getTeamOverview').mockResolvedValue(teamOverview);
+        jest.spyOn(API, 'getUserData').mockResolvedValue(userData);
+
+        render(<TeamOverview />);
+
+        fireEvent.change(screen.getByTestId('input-component'), {
+            target: {
+                value: 'userData',
+            },
+        });
 
         await waitFor(() => {
             expect(screen.queryAllByText('userData')).toHaveLength(4);
